@@ -1,0 +1,23 @@
+# versao da sintaxe  do docker-composer a ser utilizada
+# version: "3.9" <<<OBSELETE>>>
+
+# define os servicos que serao executados na imagem docker
+services:
+  app:
+    build:
+      # constroi o arquivo docker dentro da pasta atual
+      context: .
+      # define que está no ambiente de DEVELOPMENT to install DEV-requirements
+      args:
+        - DEV=true
+    # mapeia a porta 8000 da maquina local para a 8000 dentro do container docker
+    ports:
+      - "8000:8000"
+    # mapeia pastas da maquina local para pasta dentro do container docker
+    # isto faz com que alteracoes feitas nas pastas locais sejam refletidas nas pastas do container
+    volumes:
+      - ./app:/app
+    # comando executado para executar o servico 
+    # se nao for especificado, sera executado o comando (RUN) dentro de Dockerfile 
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
