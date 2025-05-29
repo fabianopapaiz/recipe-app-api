@@ -3,6 +3,8 @@
 
 # define os servicos que serao executados na imagem docker
 services:
+
+  # web-app service
   app:
     build:
       # constroi o arquivo docker dentro da pasta atual
@@ -21,3 +23,46 @@ services:
     # se nao for especificado, sera executado o comando (RUN) dentro de Dockerfile 
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
+    # vars para acessar o DB
+    environment:
+      - DB_HOST=db  
+      - DB_NAME=devdb  
+      - DB_USER=devuser  
+      - DB_PASS=12345  
+    depends_on:
+      - db_postgres
+
+
+  #database service PG
+  db_postgres:
+    image: postgres:13-alpine
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - dev-db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=devdb  
+      - POSTGRES_USER=devuser  
+      - POSTGRES_PASSWORD=12345  
+
+
+  #database service MYSQL
+  db_mysql:
+    image: mysql:8.0.42-debian
+    restart: always
+    ports:
+      - "3307:3306"
+    volumes:
+      - dev-db-data-mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=devdb  
+      # - MYSQL_USER=devuser  
+      # - MYSQL_PASSWORD=12345
+      - MYSQL_ROOT_PASSWORD=12345
+
+# nao precisa setar o "dev-db-data" pq o docker irah gerenciar isto automaticamente
+volumes:
+  dev-db-data:
+  dev-db-data-mysql:
+
