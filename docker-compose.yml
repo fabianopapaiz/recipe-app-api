@@ -36,9 +36,9 @@ services:
   #database service PG
   db_postgres:
     image: postgres:13-alpine
+    # restart: always
     ports:
-      - "5432:5432"
-
+      - "5433:5432"
     volumes:
       - dev-db-data:/var/lib/postgresql/data
     environment:
@@ -47,22 +47,22 @@ services:
       - POSTGRES_PASSWORD=12345  
 
 
-  #database service MYSQL
-  db_mysql:
-    image: mysql:8.0.42-debian
-    restart: always
-    ports:
-      - "3307:3306"
-    volumes:
-      - dev-db-data-mysql:/var/lib/mysql
-    environment:
-      - MYSQL_DATABASE=devdb  
-      # - MYSQL_USER=devuser  
-      # - MYSQL_PASSWORD=12345
-      - MYSQL_ROOT_PASSWORD=12345
+  # #database service MYSQL
+  # db_mysql:
+  #   image: mysql:8.0.42-debian
+  #   restart: always
+  #   ports:
+  #     - "3307:3306"
+  #   volumes:
+  #     - dev-db-data-mysql:/var/lib/mysql
+  #   environment:
+  #     - MYSQL_DATABASE=devdb  
+  #     # - MYSQL_USER=devuser  
+  #     # - MYSQL_PASSWORD=12345
+  #     - MYSQL_ROOT_PASSWORD=12345
 
 # nao precisa setar o "dev-db-data" pq o docker irah gerenciar isto automaticamente
 volumes:
   dev-db-data:
-  dev-db-data-mysql:
+  # dev-db-data-mysql:
 
