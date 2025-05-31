@@ -25,12 +25,14 @@ services:
       sh -c "python manage.py runserver 0.0.0.0:8000"
     # vars para acessar o DB
     environment:
-      - DB_HOST=db  
+      - DB_HOST=db_postgres  
       - DB_NAME=devdb  
       - DB_USER=devuser  
       - DB_PASS=12345  
     depends_on:
       - db_postgres
+    # networks:
+    #   - djangonetwork    
 
 
   #database service PG
@@ -45,6 +47,8 @@ services:
       - POSTGRES_DB=devdb  
       - POSTGRES_USER=devuser  
       - POSTGRES_PASSWORD=12345  
+    # networks:
+    #   - djangonetwork    
 
 
   # #database service MYSQL
@@ -66,3 +70,6 @@ volumes:
   dev-db-data:
   # dev-db-data-mysql:
 
+# networks:
+#   djangonetwork:
+#     driver: bridge

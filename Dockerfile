@@ -31,17 +31,24 @@ ARG DEV=false
 # Executa os comandos:
 # 1. cria ambiente virtual "py"
 # 2. faz upgrade no PIP
-# 3. instala os pacotes definidos em requirements.txt
-# 4. instala SE PRECISAR os pacotes definidos em requirements.dev.txt
-# 5. exclui pasta "tmp"
-# 6. cria o usuario "django-user" sem senha e sem pasta "home" 
+# 3. instala pacote para acessar o BD PostgreSQL a partir do Django
+# 4. instala os pacotes necessarios para instalar o postgres-client de forma que poderemos remove-los depois
+# 5. instala os pacotes definidos em requirements.txt
+# 6. instala SE PRECISAR os pacotes definidos em requirements.dev.txt
+# 7. exclui pasta "tmp"
+# 8. remove os pacotes necessarios para compilar o postgresql-client
+# 9. cria o usuario "django-user" sem senha e sem pasta "home" 
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
+    apk add --update --no-cache postgresql-client &&\
+    apk add --update --no-cache --virtual .tmp-build-deps \ 
+        build-base postgresql-dev musl-dev &&\
     /py/bin/pip install -r /tmp/requirements.txt && \
     if [ $DEV = "true" ]; \
         then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
     fi && \
     rm -rf /tmp && \
+    apk del .tmp-build-deps && \
     adduser \
         --disabled-password \
         --no-create-home \
