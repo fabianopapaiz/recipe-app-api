@@ -9,26 +9,39 @@ services:
     build:
       # constroi o arquivo docker dentro da pasta atual
       context: .
+
       # define que está no ambiente de DEVELOPMENT to install DEV-requirements
       args:
         - DEV=true
+
     # mapeia a porta 8000 da maquina local para a 8000 dentro do container docker
     ports:
       - "8000:8000"
+
     # mapeia pastas da maquina local para pasta dentro do container docker
     # isto faz com que alteracoes feitas nas pastas locais sejam refletidas nas pastas do container
     volumes:
       - ./app:/app
+
     # comando executado para executar o servico 
     # se nao for especificado, sera executado o comando (RUN) dentro de Dockerfile 
+    # Serao executados:
+    #   1. O Command wait_for_db para aguardar o BD estar disponivel antes de iniciar a webapp
+    #   2. Realiza as migracoes necessarias no BD
+    #   3. Executa o servidor de aplicacoes
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate     &&
+             python manage.py runserver 0.0.0.0:8000"
+
     # vars para acessar o DB
     environment:
       - DB_HOST=db_postgres  
       - DB_NAME=devdb  
       - DB_USER=devuser  
       - DB_PASS=12345  
+
+    # servicos que precisam ser iniciados antes desse para que tudo funcione
     depends_on:
       - db_postgres
     # networks:
