@@ -1,22 +1,37 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as transl
+from django.utils.html import format_html
 from core import models
 
 
 class UsuarioAdmin(UserAdmin):
+    # define um botao para realizar a edicao
+    def action_buttons(self, obj):
+        ret = format_html('<a class="btn" href="/admin/core/usuario/{}/change/">Editar</a>', obj.id) + \
+              format_html('&nbsp;&nbsp;') + \
+              format_html('<a class="btn" href="/admin/core/usuario/{}/delete/">Excluir</a>', obj.id)
+        return ret
+
+    # define o titulo da coluna de acoes (editar, excluir) 
+    action_buttons.short_description = 'Ações'
+
     # define a ordenacao default dos registros
     ordering = ['email']
     # define os campos que serao exibidos na tela de listagem
-    list_display = ['email', 'nome', 'is_active', 'is_staff', 'last_login']
+    list_display = ['nome', 'email', 'is_active', 'is_staff', 'last_login', 'action_buttons']
+    list_display_links = ['nome', 'email']
     # define os campos somente de leitura
     readonly_fields = ['last_login']
+
+
+
     # define os campos que serao editados durante a inclusao ou alteracao.
     # Aqui tambem podem ser definidos grupos para agrupar campos
     fieldsets = (
         (
             None, # None = "Sem agrupamento"
-            {'fields': ('email', 'password')},
+            {'fields': ('nome', 'email', 'password')},
         ),
         (
             transl('Permissões'), # Nome do grupo de campos, usando metodo para fazer traducao
@@ -37,10 +52,11 @@ class UsuarioAdmin(UserAdmin):
                 'classes': (
                     'wide', # wide: insere um espacamento horizontal extra entre os elementos
                     # 'collapse', # collapse: o grupo aparece 'recolhido' e o usuario podera expandir se quiser
-                    # 'your_custom_css_class', # pode utilizar outras classes definidas em CSS
+                    # 'your_custom_CSS_class', # pode utilizar outras classes definidas em CSS
                 ),
                 # campos
                 'fields': (
+                    'nome',
                     'email', 
                     'password1', # senha
                     'password2', # confirmação da senha
@@ -62,4 +78,9 @@ class UsuarioAdmin(UserAdmin):
         ),
     )
 
+
+
+"""
+REGISTRA AS INTERFACES DE USUARIO DO MODULO ADMIN
+"""
 admin.site.register(models.Usuario, UsuarioAdmin)

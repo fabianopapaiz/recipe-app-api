@@ -37,8 +37,8 @@ class UsuarioManager(BaseUserManager):
 class Usuario(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True ,blank=False, null=False)
     nome = models.CharField(max_length=100)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(verbose_name='Ativo', default=True)
+    is_staff = models.BooleanField(verbose_name='Administrador', default=False)
 
     objects = UsuarioManager()
 
