@@ -20,7 +20,7 @@ class UsuarioAdmin(UserAdmin):
     ordering = ['email']
     # define os campos que serao exibidos na tela de listagem
     list_display = ['nome', 'email', 'is_active', 'is_staff', 'last_login', 'action_buttons']
-    list_display_links = ['nome', 'email']
+    list_display_links = None #['nome', 'email']
     # define os campos somente de leitura
     readonly_fields = ['last_login']
 
@@ -83,4 +83,6 @@ class UsuarioAdmin(UserAdmin):
 """
 REGISTRA AS INTERFACES DE USUARIO DO MODULO ADMIN
 """
+admin.site.disable_action("delete_selected")
+
 admin.site.register(models.Usuario, UsuarioAdmin)
