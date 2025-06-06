@@ -35,7 +35,8 @@ class UsuarioManager(BaseUserManager):
 
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(max_length=255, unique=True ,blank=False, null=False)
+    email = models.EmailField(verbose_name='E-mail', max_length=255, unique=True ,blank=False, null=False, 
+                              help_text='O e-mail informado será utilizado para fazer o login no sistema.')
     nome = models.CharField(max_length=100)
     is_active = models.BooleanField(verbose_name='Ativo', default=True)
     is_staff = models.BooleanField(verbose_name='Administrador', default=False)
