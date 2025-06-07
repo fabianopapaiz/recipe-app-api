@@ -1,0 +1,8 @@
+
+{
+    "python.envFile": "${workspaceFolder}/.env",
+    "python.defaultInterpreterPath": "/Users/papaiz/python-projects/venv/django3/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.activateEnvInCurrentTerminal": false,
+    "jupyter.jupyterServerType": "local",
+}
