@@ -34,13 +34,12 @@ class UsuarioSerializer(serializers.ModelSerializer):
         }
 
 
-    def criar(self, validated_data):
+    def create(self, validated_data):
         """Cria e retorna um Usuario com a senha criptografada"""
-        
         return get_user_model().objects.create_user(**validated_data)    
 
 
-    def alterar(self, instance, validated_data):
+    def update(self, instance, validated_data):
         """Altera e retorna os dados de um Usuario existente"""
 
         # obtem a nova senha, caso ela tenha sido informada.
@@ -95,6 +94,6 @@ class CriarTokenSerializer(serializers.Serializer):
         # se o usuario foi autenticado com sucesso
         else:
             # adiciona o usuario autenticado nos parametros e retorna    
-            attrs['usuario'] = usuario
+            attrs['user'] = usuario
             return attrs
 

@@ -21,7 +21,6 @@ class CriarUsuarioView(generics.CreateAPIView):
 
 class CriarTokenView(ObtainAuthToken):
     """EndPoint para criar um novo token de acesso para o usuario"""
-
     serializer_class = CriarTokenSerializer
     # opcional para exibir uma UI mais agradavel para testar a API
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
@@ -40,4 +39,4 @@ class GerenciarUsuarioView(generics.RetrieveUpdateAPIView):
     # sobrescreve o metodo para retornar o objeto Usuario para a View
     def get_object(self):
         """Obtem e retorna o usuario autenticado"""
-        return self.request.usuario
+        return self.request.user
