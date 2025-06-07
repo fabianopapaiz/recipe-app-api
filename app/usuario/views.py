@@ -39,4 +39,5 @@ class GerenciarUsuarioView(generics.RetrieveUpdateAPIView):
     # sobrescreve o metodo para retornar o objeto Usuario para a View
     def get_object(self):
         """Obtem e retorna o usuario autenticado"""
+        # OBS: tem que usar "user" para funcionar automaticamente  
         return self.request.user
