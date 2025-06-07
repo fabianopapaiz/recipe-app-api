@@ -18,16 +18,20 @@ from drf_spectacular.views import(
     SpectacularSwaggerView,
 )
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
     # =========================
     # documentacao da API
     # =========================
     # schema da API no formato YAML
     path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),
     # documentacao do Swagger que vai usar o schema para gerar as UI para testar a API
-    path('api/docs/', SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs')
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs'),
+
+    # API de gerenciamento de usuarios
+    path('api/usuario', include('usuario.urls')),
 ]
