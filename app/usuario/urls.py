@@ -26,10 +26,10 @@ urlpatterns = [
     ),
     path(
         # qualquer URL com esse padrao sera tratado pela view especificada
-        'meu_perfil/',
+        'perfil/',
         views.GerenciarUsuarioView.as_view(),
         # o metodo chamado sera o 'UsuarioView.UsuarioSerializer.criar()'
-        name='meu_perfil',
+        name='perfil',
     ),
 
 ]
