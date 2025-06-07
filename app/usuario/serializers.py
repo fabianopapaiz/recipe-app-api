@@ -34,13 +34,13 @@ class UsuarioSerializer(serializers.ModelSerializer):
         }
 
 
-    # OBS: tem que usar "create" para sobrescrever o metodo padrao  
+    # OBS: tem que usar "create" para sobrescrever o metodo padrao e associar com POST 
     def create(self, validated_data):
         """Cria e retorna um Usuario com a senha criptografada"""
         return get_user_model().objects.create_user(**validated_data)    
 
 
-    # OBS: tem que usar "update" para sobrescrever o metodo padrao  
+    # OBS: tem que usar "update" para sobrescrever o metodo padrao e associar com PUT/PATCH
     def update(self, instance, validated_data):
         """Altera e retorna os dados de um Usuario existente"""
 
