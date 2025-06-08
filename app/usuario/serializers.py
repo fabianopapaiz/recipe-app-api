@@ -1,5 +1,5 @@
 """
-Serializers para a API de generiamento de usuarios
+Serializers para a API de gerenciamento de usuarios
 """
 
 from django.contrib.auth import (

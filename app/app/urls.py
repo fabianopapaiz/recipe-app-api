@@ -34,4 +34,7 @@ urlpatterns = [
 
     # API de gerenciamento de usuarios
     path('api/usuario/', include('usuario.urls')),
+
+    # API de gerenciamento de receitas
+    path('api/', include('receita.urls')),
 ]

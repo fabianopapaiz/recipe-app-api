@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 from django.contrib.auth.models import (
@@ -47,3 +48,24 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         db_table = 'usuario'
+
+
+# ================================================================
+# Outros Models
+# ================================================================
+
+class Receita(models.Model):
+    titulo = models.CharField(verbose_name='Título', max_length=255)
+    descricao = models.TextField(verbose_name='Descrição')
+    tempo_preparo = models.IntegerField(verbose_name='Tempo de Preparo', help_text='Em minutos')
+    preco = models.DecimalField(verbose_name='Preço', max_digits=7, decimal_places=2) 
+    link = models.CharField(verbose_name='Link', max_length=255, blank=True)
+    # obtem o usuario configurado neste projeto do arquivo settings.py
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+
+    class Meta:
+        db_table = 'receita'
+
+    # representacao deste objeto como uma STRING
+    def __str__(self):
+        return self.titulo

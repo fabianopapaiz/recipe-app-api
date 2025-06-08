@@ -17,7 +17,7 @@ class UsuarioAdmin(UserAdmin):
     action_buttons.short_description = 'Ações'
 
     # define a ordenacao default dos registros
-    ordering = ['email']
+    ordering = ['nome']
     # define os campos que serao exibidos na tela de listagem
     list_display = ['nome', 'email', 'is_active', 'is_staff', 'last_login', 'action_buttons']
     list_display_links = None #['nome', 'email']
@@ -86,3 +86,4 @@ REGISTRA AS INTERFACES DE USUARIO DO MODULO ADMIN
 admin.site.disable_action("delete_selected")
 
 admin.site.register(models.Usuario, UsuarioAdmin)
+admin.site.register(models.Receita)

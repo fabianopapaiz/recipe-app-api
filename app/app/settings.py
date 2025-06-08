@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # meus APPs
     'core',
     'usuario',
+    'receita',
     # outros necessarios
     'rest_framework',
     'rest_framework.authtoken',
