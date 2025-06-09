@@ -72,5 +72,4 @@ class Receita(models.Model):
 
 
     def save(self, *args, **kwargs):
-        print('asd asdasdas das das dsa')
         return super().save(*args, **kwargs)

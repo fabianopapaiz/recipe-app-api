@@ -26,10 +26,10 @@ class ReceitaSerializer(serializers.ModelSerializer):
         return receita
 
 
-def ReceitaDetalheSerializer(ReceitaSerializer):
-    """ Serializer para exibir os detalhes de uma Receita, herdando de ReceitaSerializer"""
+# def ReceitaDetalheSerializer(ReceitaSerializer):
+#     """ Serializer para exibir os detalhes de uma Receita, herdando de ReceitaSerializer"""
 
-    # herda o Meta da superclasse
-    class Meta(ReceitaSerializer.Meta):
-        # adiciona o campo descricao
-        fields = ReceitaSerializer.Meta.fields + ['descricao']
+#     # herda o Meta da superclasse
+#     class Meta(ReceitaSerializer.Meta):
+#         # adiciona o campo descricao
+#         fields = ReceitaSerializer.Meta.fields + ['descricao']
