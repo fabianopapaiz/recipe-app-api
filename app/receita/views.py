@@ -45,24 +45,22 @@ class ReceitaViewSet(viewsets.ModelViewSet):
 
     # Sobrescreve o queryset por um filtrado pelo usuario autenticado
     def get_queryset(self):
-        return self.queryset.filter(usuario=self.request.user).order_by('-id')
+        return self.queryset.filter(usuario=self.request.user).order_by('titulo')
 
     # # sobrescreve o metodo para obter o serializer
     # def get_serializer_class(self):
     #     # se a acao for 'list' (listagem) retorna o serializer Receita
     #     if self.action == 'list':
-    #         print('aquiiiiiiii')
+    #         print('get_serializer_class = ReceitaSerializer')
     #         return serializers.ReceitaSerializer
     #     # se for outra acao, retorna o serializer ReceitaDetalhe
     #     else:
-    #         print('aliiiiiiii')
+    #         print('get_serializer_class = ReceitaDetalheSerializer')
     #         return self.serializer_class
 
     def perform_create(self, serializer):
         """Cria uma nova receita"""
-
-        print('>>>')
-        print(serializer)
+        print('ReceitaViewSet.perform_create()')
 
         # cria uma nova receita informando o usuario autenticado
         serializer.save(usuario=self.request.user)

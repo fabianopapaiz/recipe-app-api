@@ -71,5 +71,5 @@ class Receita(models.Model):
         return self.titulo
 
 
-    def save(self, *args, **kwargs):
-        return super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     return super().save(*args, **kwargs)

@@ -33,3 +33,8 @@ class ReceitaSerializer(serializers.ModelSerializer):
 #     class Meta(ReceitaSerializer.Meta):
 #         # adiciona o campo descricao
 #         fields = ReceitaSerializer.Meta.fields + ['descricao']
+
+
+#     def create(self, validated_data):
+#         print('ReceitaDetalheSerializer.create()')
+#         return super().create(self, validated_data)
