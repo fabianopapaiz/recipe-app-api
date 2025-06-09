@@ -69,3 +69,8 @@ class Receita(models.Model):
     # representacao deste objeto como uma STRING
     def __str__(self):
         return self.titulo
+
+
+    def save(self, *args, **kwargs):
+        print('asd asdasdas das das dsa')
+        return super().save(*args, **kwargs)

@@ -21,3 +21,15 @@ class ReceitaSerializer(serializers.ModelSerializer):
         read_only_fields = ['id']
 
 
+    def create(self, validated_data):
+        receita = Receita.objects.create(**validated_data)
+        return receita
+
+
+def ReceitaDetalheSerializer(ReceitaSerializer):
+    """ Serializer para exibir os detalhes de uma Receita, herdando de ReceitaSerializer"""
+
+    # herda o Meta da superclasse
+    class Meta(ReceitaSerializer.Meta):
+        # adiciona o campo descricao
+        fields = ReceitaSerializer.Meta.fields + ['descricao']
