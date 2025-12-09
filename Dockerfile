@@ -16,7 +16,7 @@ COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 
 # copia a pasta onde esta a nossa aplicacao
-COPY ./app /app
+COPY ./app /app	
 
 # pasta onde serao excutados os comandos que enviarmos para a imagem Docker
 WORKDIR /app

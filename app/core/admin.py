@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as transl
 from django.utils.html import format_html
-from core import models
+from app import models
 
 
 class UsuarioAdmin(UserAdmin):
@@ -86,4 +86,3 @@ REGISTRA AS INTERFACES DE USUARIO DO MODULO ADMIN
 admin.site.disable_action("delete_selected")
 
 admin.site.register(models.Usuario, UsuarioAdmin)
-admin.site.register(models.Receita)
